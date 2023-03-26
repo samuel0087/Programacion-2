@@ -20,8 +20,8 @@ obj/
 *.pif
 *.vb
 *.wsf
-.o
-
+*.o
+*.pdf
 
 .pdf
 # End of https:
