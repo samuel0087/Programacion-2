@@ -12,6 +12,7 @@ ademas por cada ingreso de los estudiantes al aula virtual se registra lo siguie
 -numero de materia a la que ingreso
 -cantidad de horas(real)
 
+La carga se termina con un numero de legajo igual a 0
 se requiere lo siguiente:
 a ) las materias que no tuvieron acceso de alumnos nunca
 b ) la materia que mas cantidad de horas registro de acceso de alumnos
@@ -35,11 +36,15 @@ struct materia
 void cargaCadena(char*);
 void cargaMaterias(materia*, int);
 void mostrarMaterias(materia*, int);
+void cargaIngresos(float*, int);
+int traerMateria(materia*, int, int);
+void materiasSinAcceso(materia*, float*, int);
 
 int main()
 {
     const int TAM = 5;
     materia materias[TAM];
+    float vCanAcceso[20] = {};
     int opc = 1;
 
     while(opc)
@@ -75,9 +80,11 @@ int main()
             break;
 
         case 3:
+            cargaIngresos(vCanAcceso, TAM);
             break;
 
         case 4:
+            materiasSinAcceso(materias, vCanAcceso, TAM);
             break;
 
         case 5:
@@ -169,4 +176,68 @@ void mostrarMaterias(materia* m, int tam)
        cout << "---------------------------------------------------" << endl;
 
     }
+}
+
+void cargaIngresos(float* v, int tam){
+    int numMateria, numLegajo, dia, mes;
+    float canHoras;
+
+    cout << "Ingrese num de legajo del estudiante: ";
+    cin >> numLegajo;
+
+    while(numLegajo != 0)
+    {
+        cout << "Ingrese dia de acceso: ";
+        cin >> dia;
+
+        cout << "Ingrese mes de acceso: ";
+        cin >> mes;
+
+        cout << "ingrese numero de materia: ";
+        cin >> numMateria;
+
+        cout << "Ingrese cantidad de Horas que ingreso: ";
+        cin >> canHoras;
+        cout << endl;
+
+        v[numMateria-1] += canHoras;
+
+
+        cout << "Ingrese num de legajo del estudiante: ";
+        cin >> numLegajo;
+    }
+}
+
+void materiasSinAcceso(materia* mat, float* va, int tam)
+{
+    int index;
+    cout << left;
+    cout << "|"<< setw(40) << "MATERIAS SIN ACCESO DE ALUMNOS " << "|" <<endl;
+    cout << "|" << setw(40) << "----------------------------------------" <<  "|" <<endl;
+
+    for(int i = 0; i < tam; i++)
+    {
+        if(va[i] == 0)
+        {
+            index = traerMateria(mat, i+1, tam);
+            cout << "|"<< setw(40) << mat[index].nomMateria << "|" <<endl;
+            cout << "|"<< setw(40)  << "----------------------------------------" << "|"<< endl;
+        }
+    }
+
+}
+
+int traerMateria(materia* mat, int num, int tam)
+{
+    int index;
+
+    for(int i = 0; i < tam; i++)
+    {
+        if(mat[i].numMateria == num)
+        {
+            index = i;
+        }
+    }
+
+    return index;
 }
