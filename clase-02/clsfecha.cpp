@@ -1,37 +1,28 @@
-///Ejercicio:
-///Autor:DEK
-///Fecha:
-///Comentario:
-
-
-
-
-
-
 # include<iostream>
 # include<cstdlib>
-#include <cstring>
+# include <cstring>
 
 using namespace std;
+
 void cargarCadena(char *pal, int tam);
 
 
-class Fecha{
+class Fecha
+{
     private:///todo lo que se defina acá sólo va a ser accesible dentro de la clase
         int dia, mes, anio;
     public:
         ///constructor tiene el mismo nombre que la clase; no devuelve NADA; se ejecuta de manera automática cuando el objeto nace
-        /*Fecha(){
-            dia=mes=anio=0;
-        }*/
-        Fecha(int dia=0, int mes=0, int anio=0){
+        Fecha(int dia=0, int mes=0, int anio=0)
+        {
             this->dia=dia;
             this->mes=mes;
             this->anio=anio;
         }
 
 
-        void Cargar(){///método o función de la clase
+        void Cargar() ///método o función de la clase
+        {
             cout<<"DIA: ";
             cin>>dia;
             cout<<"MES: ";
@@ -39,98 +30,144 @@ class Fecha{
             cout<<"ANIO: ";
             cin>>anio;
         }
-        void Mostrar(){///método o función de la clase
-            cout<<"DIRECCION DEL OBJETO: "<<this<<endl;
-            cout<<"DIA: "<<dia<<endl;
-            cout<<"MES: "<<mes<<endl;
-            cout<<"ANIO: "<<anio<<endl<<endl;
+        void Mostrar() ///método o función de la clase
+        {
+            cout <<dia<< "/";
+            cout <<mes<< "/";
+            cout <<anio<<endl<<endl;
         }
         ///sets
-        void setDia(int x){if(x>0 && x<32) dia=x;}
-        void setMes(int x){if(x>0 && x<13)mes=x;}
-        void setAnio(int x){anio=x;}
+        void setDia(int x)
+        {
+            if(x>0 && x<32)
+            {
+                dia=x;
+            }
+        }
+
+        void setMes(int x)
+        {
+            if(x>0 && x<13)
+            {
+                mes=x;
+            }
+        }
+
+        void setAnio(int x)
+        {
+            anio=x;
+        }
         ///gets
-        int getDia(){return dia;}
-        int getMes(){return mes;}
-        int getAnio(){return anio;}
+        int getDia()
+        {
+            return dia;
+        }
+        int getMes()
+        {
+            return mes;
+        }
+        int getAnio()
+        {
+            return anio;
+        }
 
 };
 
-class Cliente{
+class Cliente
+{
     private:
         int _dni;
         Fecha _fechaNacimiento;
-        char _nombre[11];
+        char _nombre[21];
         char _apellido[11];
         int _telefono;
         char _email[21];
 
     public:
+        Cliente(int dni = 0, const char* nom = "Nombre", const char* ape ="Apellido", int tel = 0,const char* email = "EMAIL")
+        {
+            _dni = dni;
+            strcpy(_nombre, nom);
+            strcpy(_apellido, ape);
+            _telefono = tel;
+            strcpy(_email, email);
+        }
 
-        void setDni(int dni){
+
+        void setDni(int dni)
+        {
             _dni = dni;
         }
 
-
-        void setNombre(const char* nombre){
+        void setNombre(const char* nombre)
+        {
             strcpy(_nombre, nombre);
         }
 
-        void setApellido(const char* ape){
+        void setApellido(const char* ape)
+        {
             strcpy(_apellido, ape);
         }
 
-        void setTelefono(int telefono){
+        void setTelefono(int telefono)
+        {
             _telefono = telefono;
         }
 
-        void setEmail(const char* email){
+        void setEmail(const char* email)
+        {
             strcpy(_email, email);
         }
 
 
         //gets
 
-        int getDni(){
+        int getDni()
+        {
             return _dni;
         }
 
 
-        const char *getNombre(){
+        const char *getNombre()
+        {
             return _nombre;
         }
 
-        const char *getApellido(){
+        const char *getApellido()
+        {
             return _apellido;
         }
 
-        int getTelefono(){
-           return _telefono;
+        int getTelefono()
+        {
+            return _telefono;
         }
 
-        const char *getEmail(){
+        const char *getEmail()
+        {
             return _email;
         }
 
 
         void cargar();
 
-        void mostratar();
+        void mostrar();
 
 };
 
 
-void Cliente::cargar(){
+void Cliente::cargar()
+{
     int dni, telefono;
-    char nombre[10], apellido[10], mail[20];
+    char nombre[21], apellido[21], mail[21];
     cout << "Ingrese DNI: ";
     cin >> dni;
 
     cout << "Ingrese nombre: ";
-    cargarCadena(nombre, 10);
+    cargarCadena(nombre, 20);
 
     cout << "Ingrese apellido";
-    cargarCadena(apellido, 10);
+    cargarCadena(apellido, 20);
 
     cout << "Ingrese Telefono: ";
     cin >> telefono;
@@ -152,29 +189,50 @@ void Cliente::cargar(){
 
 }
 
+void Cliente::mostrar()
+{
+    cout << "DNI: ";
+    cout << getDni() << endl;
 
+    cout << "nombre: ";
+    cout << getNombre() << endl;
 
+    cout << "apellido: ";
+    cout << getApellido() << endl;
 
+    cout << "Telefono: ";
+    cout << getTelefono() << endl;
 
+    cout << "mail: ";
+    cout << getEmail() << endl;
 
-int main(){
+    cout << "Fecha de nacimiento: ";
+    _fechaNacimiento.Mostrar();
 
-    Fecha fechaNac(15,10), obj;
-    cout<<" VALOR DE obj "<<endl;
-    obj.Mostrar();
-    cout<<endl;
-	cout<<"VALOR DE fechaNac"<<endl;
-	fechaNac.Mostrar();
-	cout<<endl;
-	system("pause");
-	return 0;
 }
 
 
-void cargarCadena(char *pal, int tam) {
+
+
+
+int main()
+{
+    Cliente obj;
+
+    obj.cargar();
+
+    obj.mostrar();
+
+    return 0;
+}
+
+
+void cargarCadena(char *pal, int tam)
+{
     int i;
     fflush(stdin);
-    for(i=0; i<tam; i++) {
+    for(i=0; i<tam; i++)
+    {
         pal[i]=cin.get();
         if(pal[i]=='\n') break;
     }
