@@ -2,7 +2,6 @@
 #include <cstring>
 using namespace std;
 
-void cargarCadena(char*, int);
 
 class Articulo{
     private:
@@ -73,6 +72,12 @@ class Articulo{
         void cargar();
         void mostrar();
 };
+
+void cargarCadena(char*, int);
+void cargarVector(Articulo*, int);
+void listarVector(Articulo*, int);
+void listarMayores(Articulo*,float, int);
+char devuelveIndex(Articulo*, char*, int);
 
 int main(){
     Articulo mema;
@@ -150,5 +155,41 @@ void cargarCadena(char *pal, int tam){
 
   pal[i]='\0';
   fflush(stdin);
+}
+
+//funciones generales
+void cargarVector(Articulo* v, int tam){
+    for(int i = 0; i < tam; i++){
+        v[i].cargar();
+        cout << "-----------------" << endl;
+    }
+}
+
+void listarVector(Articulo* v, int tam){
+    for(int i = 0; i < tam; i++){
+        v[i].mostrar();
+        cout << "-----------------" << endl;
+    }
+}
+
+void listarMayores(Articulo* v, float num, int tam) {
+    for(int i = 0; i < tam; i++){
+        if(v[i].getPrecio() > num){
+            v[i].mostrar();
+            cout << "-----------------" << endl;
+        }
+    }
+}
+
+char devuelveIndex(Articulo* vA, char* vC,int tam){
+    int index = -1;
+
+    for(int i = 0; i < tam; i++){
+        if(strcmp(vA[i].getCodigo(), vC) == 0){
+            int index = i;
+        }
+    }
+
+    return index;
 }
 
