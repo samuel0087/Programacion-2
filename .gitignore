@@ -22,6 +22,7 @@ obj/
 *.wsf
 *.o
 *.pdf
+*.PDF
 
 .pdf
 # End of https:
