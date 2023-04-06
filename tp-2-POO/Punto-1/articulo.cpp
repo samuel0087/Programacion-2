@@ -78,6 +78,9 @@ void cargarVector(Articulo*, int);
 void listarVector(Articulo*, int);
 void listarMayores(Articulo*,float, int);
 char devuelveIndex(Articulo*, char*, int);
+Articulo devuelveArticulo(Articulo*, char*, int);
+int devuelveCantMenores(Articulo*, int, int);
+void cambiarPrecios(Articulo*, float, int);
 
 int main(){
     Articulo mema;
@@ -193,3 +196,34 @@ char devuelveIndex(Articulo* vA, char* vC,int tam){
     return index;
 }
 
+Articulo devuelveArticulo(Articulo* vA, char* cod, int tam){
+    for(int i = 0; i < tam; i++){
+        if(strcmp(vA[i].getCodigo(), cod) == 0){
+            return vA[i];
+        }
+    }
+    Articulo art;
+    art.setStock(-1);
+
+    return   art;
+}
+
+int devuelveCantMenores(Articulo* vA,int num, int tam){
+    int cont = 0;
+
+    for(int i = 0; i < tam; i++){
+        if(vA[i].getStock() < num){
+            cont++;
+        }
+    }
+
+    return cont;
+}
+
+void cambiarPrecios(Articulo* vA, float aumento, int tam){
+    aumento = (aumento + 100.0f) / 100.0f;
+
+    for(int i = 0; i < tam; i ++){
+        vA[i].setPrecio((vA[i].getPrecio() * aumento));
+    }
+}
