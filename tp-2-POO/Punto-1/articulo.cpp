@@ -93,7 +93,14 @@ int main(){
 
         cout << "Ingrese una opcion: " << endl;
 
-        cout << "1 - cargar Articulos: " << endl;        cout << "2 - Mostrar Articulos: " << endl;        cout << "3 - Listar mayor precio: " << endl;        cout << "4 - mostar la posicion del articulo: " << endl;        cout << "5 - Buscar un Articulo: " << endl;        cout << "6 - Buscar menor stock de Articulos: " << endl;        cout << "7 - Aumentar precio de Articulos: " << endl;        cout << "0 - salir " << endl;
+        cout << "1 - cargar Articulos: " << endl;
+        cout << "2 - Mostrar Articulos: " << endl;
+        cout << "3 - Listar mayor precio: " << endl;
+        cout << "4 - mostar la posicion del articulo: " << endl;
+        cout << "5 - Buscar un Articulo: " << endl;
+        cout << "6 - Buscar menor stock de Articulos: " << endl;
+        cout << "7 - Aumentar precio de Articulos: " << endl;
+        cout << "0 - salir " << endl;
 
         cin >> opc;
 
