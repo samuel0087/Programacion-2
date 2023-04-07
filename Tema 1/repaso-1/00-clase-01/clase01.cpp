@@ -1,4 +1,4 @@
-/*
+/**
 Las autoridade sde la carrera de TUP estan realizando un analisis de los recursos vitales de las distintas
 materias por cada una de las 20 materias de la carrera tiene la siguiente informacion:
 -numero de materia (entre 1 y 20)
