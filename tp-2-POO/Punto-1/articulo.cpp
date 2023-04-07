@@ -77,25 +77,71 @@ void cargarCadena(char*, int);
 void cargarVector(Articulo*, int);
 void listarVector(Articulo*, int);
 void listarMayores(Articulo*,float, int);
-char devuelveIndex(Articulo*, char*, int);
+int devuelveIndex(Articulo*, char*, int);
 Articulo devuelveArticulo(Articulo*, char*, int);
 int devuelveCantMenores(Articulo*, int, int);
 void cambiarPrecios(Articulo*, float, int);
 
 int main(){
-    Articulo mema;
+    const int TAM = 3;
+    Articulo art[TAM];
+    int opc = 1, index;
+    float aux;
+    char cod[10];
 
-    mema.mostrar();
+    while(opc){
 
-    cout << endl << "----------------------" << endl;
+        cout << "Ingrese una opcion: " << endl;
 
-    mema.cargar();
+        cout << "1 - cargar Articulos: " << endl;        cout << "2 - Mostrar Articulos: " << endl;        cout << "3 - Listar mayor precio: " << endl;        cout << "4 - mostar la posicion del articulo: " << endl;        cout << "5 - Buscar un Articulo: " << endl;        cout << "6 - Buscar menor stock de Articulos: " << endl;        cout << "7 - Aumentar precio de Articulos: " << endl;        cout << "0 - salir " << endl;
 
-    cout << endl << "----------------------" << endl;
+        cin >> opc;
 
-    mema.mostrar();
+        system("cls");
 
-    cout << endl << "----------------------" << endl;
+        switch(opc){
+        case 1:
+            cargarVector(art, TAM);
+            break;
+
+        case 2:
+            listarVector(art,TAM);
+            break;
+
+        case 3:
+            cout << "Ingrese el valor minimo;";
+            cin >> aux;
+
+            cout << "Articulos con mayor precio del ingresado" << endl;
+            listarMayores(art, aux, TAM);
+            break;
+
+        case 4:
+            cout << "Ingrese codigo del articulo para saber su posicion: ";
+            cargarCadena(cod, 5);
+            index = devuelveIndex(art, cod, TAM);
+
+            if(index > 0){
+                cout << "La posicion del articulo es: " << index << endl;
+            }
+            else{
+                cout << "El numero de articulo no existe" << endl;
+            }
+            break;
+        case 5:
+            cout << "Ingrese el codigo del articulo a mostrar: ";
+            cargarCadena(cod, 5);
+
+            Articulo artBuscado = devuelveArticulo(art, cod, TAM);
+
+            artBuscado.mostrar();
+            break;
+
+        }
+
+        system("pause");
+        system("cls");
+    }
 
 
   return 0;
@@ -184,12 +230,12 @@ void listarMayores(Articulo* v, float num, int tam) {
     }
 }
 
-char devuelveIndex(Articulo* vA, char* vC,int tam){
+int devuelveIndex(Articulo* vA, char* vC,int tam){
     int index = -1;
 
     for(int i = 0; i < tam; i++){
         if(strcmp(vA[i].getCodigo(), vC) == 0){
-            int index = i;
+            index = i+1;
         }
     }
 
