@@ -42,6 +42,8 @@ Desarrollar un proyecto de CodeBlock con un menú que llame a cada una de las fun
 #include <cstring>
 using namespace std;
 
+void cargarCadena(char*, int);
+
 class Fecha{
     private:
         int _dia;
@@ -86,21 +88,74 @@ class Fecha{
 class Cliente{
     private:
         int _dni;
-        Fecha _fechaNaciomiento;
+        Fecha _fechaNacimiento;
         char _nombres[20];
         char _apellidos[20];
         char _email[30];
         int _telefono;
 
     public:
-        Cliente(int dni = 0,Fecha f; const char* nombre = "NOMBRE", const char* apellido = "APELLIDO", const char* email="EMAIL", int telefono){
+        Cliente(int dni = 0,const char* nombre = "NOMBRE", const char* apellido = "APELLIDO",const char* email="EMAIL", int telefono = 0){
             _dni = dni;
             strcpy(_nombres,nombre);
-            strcpy(_apellido,apellido);
+            strcpy(_apellidos,apellido);
             strcpy(_email,email);
             _telefono = telefono;
+        }
+
+        void setDni(int dni){
+            _dni = dni;
+        }
+
+        setFecha(Fecha f){
+            _fechaNacimiento.setDia(f.getDia());
+            _fechaNacimiento.setMes(f.getMes());
+            _fechaNacimiento.setAnio(f.getAnio());
+        }
+
+        void setNombres(const char* nombres){
+            strcpy(_nombres, nombres);
 
         }
+
+        void setAppellidos(const char* apellidos){
+            strcpy(_apellidos, apellidos);
+        }
+
+        void setEmail(const char* email){
+            strcpy(_email, email);
+        }
+
+        void setTelefono(int tel){
+            _telefono = tel;
+        }
+
+        //getters
+        int getDni(){
+            return _dni;
+        }
+
+        const char* getNombre(){
+            return _nombres;
+        }
+
+        const char* getApellidos(){
+            return _apellidos;
+        }
+
+        const char* getEmail(){
+            return _email;
+        }
+
+        int getTelefono(){
+            return _telefono;
+        }
+
+
+
+        void cargar();
+        void mostrar();
+
 };
 
 int main(){
@@ -136,5 +191,47 @@ void Fecha::mostrar(){
     cout << getDia() << "/";
     cout << getMes() << "/";
     cout << getAnio() << endl;
+}
+
+void Cliente::cargar(){
+    Fecha f;
+    int dni, tel;
+    char vN[20], vA[20], vE[30];
+
+    cout << "Ingrese DNI: ";
+    cin >> dni;
+
+    f.cargar();
+
+    cout << "Ingrese nombre: ";
+    cargarCadena(vN, 20);
+
+    cout << "Ingrese apellidos: ";
+    cargarCadena(vA, 20);
+
+    cout << "Ingrese email: ";
+    cargarCadena(vE, 30);
+
+    cout << "Ingrese telefono: ";
+    cin >> tel;
+}
+
+void Cliente::mostrar(){
+}
+
+void cargarCadena(char *pal, int tam){
+  int i;
+
+  fflush(stdin);
+
+  for(i=0;i<tam;i++){
+      pal[i]=cin.get();
+
+	  if(pal[i]=='\n') break;
+
+	  }
+
+  pal[i]='\0';
+  fflush(stdin);
 }
 
