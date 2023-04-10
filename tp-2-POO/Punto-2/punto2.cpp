@@ -1,30 +1,4 @@
 /**
-3. Hacer una clase de nombre Fecha con las siguientes propiedades:
-Día
-Mes
-Año
-Y los siguientes métodos:
-Cargar()
-Mostrar()
-gets() para todas las propiedades
-sets() para todas las propiedades
-Un constructor con valores por omisión para los parámetros.
-
-4. Hacer una clase de nombre Cliente con las siguientes propiedades:
-DNI
-Fecha de nacimiento
-Nombre
-Apellido
-Email
-Teléfono
-Y los siguientes métodos:
-Cargar()
-Mostrar()
-gets() para todas las propiedades
-sets() para todas las propiedades
-Un constructor con valores por omisión para los parámetros.
-Un constructor para asignar valor sólo a la propiedad nombre.
-La propiedad fecha de nacimiento debe ser un objeto de la clase Fecha
 5. A partir de la clase Cliente del ejercicio anterior desarrollar las siguientes funciones:
 a) Cargar un vector de 10 clientes
 b) Listar todos los artículos del vector.
@@ -33,6 +7,7 @@ d) A partir de un valor de DNI recibido como parámetro, devolver la posición del
 e) Igual a la función del punto anterior, pero debe devolver el objeto completo que contiene el DNI. De no encontrar el código la función debe
 devolver un objeto Cliente con un valor de -1 en el DNI.
 f) Dado una fecha que se recibe como parámetro devolver la cantidad de clientes cuyo nacimiento sea anterior a ese valor recibido.
+
 Todas las funciones reciben el vector de Cliente y la cantidad de elementos del vector, además de los parámetros específicos.
 Desarrollar un proyecto de CodeBlock con un menú que llame a cada una de las funciones
 
@@ -85,7 +60,7 @@ class Fecha{
         void mostrar();
 };
 
-class Cliente{
+class Cliente : public Fecha{
     private:
         int _dni;
         Fecha _fechaNacimiento;
@@ -158,6 +133,15 @@ class Cliente{
 
 };
 
+
+void cargarClientes(Cliente*, int );
+void listarClientes(Cliente*, int );
+void listarDniMayor(Cliente*, int, int);
+int buscarPosicionCliente(Cliente*, int, int);
+Cliente buscarCliente(Cliente*, int, int);
+int cantidadFechasAnteriores(Cliente*, int, Fecha);
+
+
 int main(){
     Fecha fech;
 
@@ -218,6 +202,92 @@ void Cliente::cargar(){
 
 void Cliente::mostrar(){
 }
+
+
+//funciones generales
+void cargarClientes(Cliente* clientes, int tam){
+    cout << "Carga de datos de los clientes " << endl;
+
+    for(int i = 0; i < tam; i++){
+        cout << "-------------------" << endl;
+        clientes[i].cargar();
+        cout << endl;
+    }
+}
+
+void listarClientes(Cliente* clientes, int tam){
+    cout << "Listado de clientes " << endl;
+
+    for(int i = 0; i < tam; i++){
+        cout << "-------------------" << endl;
+        clientes[i].mostrar();
+        cout << endl;
+    }
+}
+
+///Busca DNI mayores al DNI que se pasa como parametro
+void listarDniMayor(Cliente* clientes, int tam, int dni){
+    cout << "Lista de clientes con DNI mayores al ingresado";
+
+    for(int i = 0; i < tam; i++){
+        cout << "-------------------" << endl;
+
+        if(clientes[i].getDni() > dni){
+            clientes[i].mostrar();
+        }
+
+        cout << endl;
+    }
+}
+
+int buscarPosicionCliente(Cliente* clientes, int tam, int dni){
+
+    for(int i = 0; i < tam; i++){
+        if(clientes[i].getDni() == dni){
+            return (i+1);
+        }
+    }
+
+    return -1;
+}
+
+Cliente buscarCliente(Cliente* clientes, int tam, int dni){
+
+    for(int i = 0; i < tam; i++){
+        if(clientes[i].getDni() == dni){
+            return clientes[i];
+        }
+    }
+
+    Cliente result;
+    result.setDni(-1);
+
+    return result;
+}
+
+int cantidadFechasAnteriores(Cliente* clientes, int tam, Fecha fechaN){
+    int cont = 0;
+
+    for(int i = 0; i < tam; i++){
+
+        if(clientes[i].getAnio() < fechaN.getAnio()){
+           cont++;
+        }
+        else{
+             if(clientes[i].getAnio() == fechaN.getAnio() && clientes[i].getMes() < fechaN.getMes()){
+                cont++;
+             }
+             else{
+                if(clientes[i].getAnio() == fechaN.getAnio() && clientes[i].getMes() == fechaN.getMes() && clientes[i].getDia() <= fechaN.getDia()){
+                    cont++;
+                }
+             }
+        }
+    }
+
+    return cont;
+}
+
 
 void cargarCadena(char *pal, int tam){
   int i;
