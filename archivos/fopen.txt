@@ -1,0 +1,39 @@
+ARCHIVOS
+CREAR / ABRIR   	fopen() -> establece una comunicacion entre el archivo fisico y el disco
+
+ESCRIBIR 		fwrite() -> llevar de la memoria al disco;
+
+LEER			fread() -> trae algo del disco a la memoria
+
+CERRAR 			fclose() -> cerrar la comunicacion entre la memoria y el archivo
+
+FILE * fopen(const  char*, const char*)
+
+tipo de dato devuelto puntero FILE
+espera recibir dos parametors:  1° -> el nombre y la ruta del archivo.	
+				2° -> modo de apertura.
+
+FILE* pCliente;
+pCliente = fopen("cliente.dat", "wb");
+
+///wb: write -> genera un archivo vacio con el nombre y el lugar que digamos
+///rb: read -> permite abrir el archivo para leerlo. Si no existe no puede abrirlo
+///ab: append -> agregan registros a los ya existentes.
+
+41929641
+21
+10
+1999
+samm
+Medina
+samuel@sam.com
+1123922527
+
+42690743
+9
+7
+2000
+Zoe
+Brizuela
+Zoe@zoe.com
+1162621865
